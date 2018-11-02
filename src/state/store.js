@@ -197,7 +197,12 @@ store.loadPaymentMethods = action(function loadPaymentMethods() {
           loadPaypalLib().then(
             action(() => {
               const methods = { ...store.paymentMethods };
-              methods.paypal = { ...methods.paypal, url: store.gocommerce.api.apiURL + "/paypal", loaded: true };
+              methods.paypal = {
+                ...methods.paypal,
+                env: methods.paypal.environment,
+                url: store.gocommerce.api.apiURL + "/paypal",
+                loaded: true
+              };
               store.paymentMethods = methods;
             })
           );
