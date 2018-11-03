@@ -20,9 +20,9 @@ const pages = {
         store.details.validated &&
         store.paymentMethods.complete
       ) {
-        state.tokenFn().then(result => {
+        state.tokenFn().then(({result, provider}) => {
           store.setPage("confirm");
-          store.setCC({ validated: true, result, provider: "stripe" });
+          store.setCC({ validated: true, result, provider });
         });
       }
     }

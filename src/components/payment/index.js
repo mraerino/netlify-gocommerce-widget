@@ -16,7 +16,10 @@ export default class Payment extends Component {
           throw result.error;
         }
 
-        return result;
+        return {
+          result,
+          provider: "stripe"
+        }
       })
     );
   };
