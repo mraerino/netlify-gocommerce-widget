@@ -1,7 +1,9 @@
 import { h, Component } from "preact";
+import { connect } from "mobx-preact";
 import StripeCard from "./stripe";
 import PaypalButton from "./paypal";
 
+@connect(["store"])
 export default class Payment extends Component {
   componentWillMount() {
     if (!this.props.methods) {
@@ -28,6 +30,7 @@ export default class Payment extends Component {
     this.props.onUpdatePaymentMethod(true, () =>
       Promise.resolve({ result: data, provider: "paypal" })
     );
+    this.props.store.setPage("confirm");
   };
 
   renderStripe() {
