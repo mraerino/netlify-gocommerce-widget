@@ -128,6 +128,10 @@ store.checkout = action(function checkout() {
       if (cc.provider === "stripe") {
         paymentMethod.stripe_token = cc.result.token.id;
       }
+      if (cc.provider === "paypal") {
+        paymentMethod.paypal_payment_id = cc.result.paymentID;
+        paymentMethod.paypal_user_id = cc.result.payerID;
+      }
       return gocommerce.payment(paymentMethod).then(
         action(transaction => {
           order.invoice_number = transaction.invoice_number;

@@ -25,7 +25,9 @@ export default class Payment extends Component {
   };
 
   handlePaypal = data => {
-    console.log(data);
+    this.props.onUpdatePaymentMethod(true, () =>
+      Promise.resolve({ result: data, provider: "paypal" })
+    );
   };
 
   renderStripe() {
